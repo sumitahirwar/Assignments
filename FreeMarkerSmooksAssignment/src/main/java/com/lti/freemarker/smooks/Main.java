@@ -16,7 +16,6 @@ import java.util.Map;
 
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.log4j.Logger;
 import org.milyn.Smooks;
 import org.milyn.SmooksException;
 import org.milyn.container.ExecutionContext;
@@ -34,7 +33,7 @@ import freemarker.template.Template;
 import freemarker.template.Version;
 
 public class Main {
-	static final Logger logger = Logger.getLogger(Main.class);
+
 	private static Configuration cfg = null;
 
 	static {
@@ -64,12 +63,12 @@ public class Main {
 			templateData.put("contextInformation", ContextInformation);
 			
 			// Write output on console example 
-			logger.info("========= Binding Java object to xml from freemarker template===========");
+			System.out.println("========= Binding Java object to xml from freemarker template===========");
 			StringWriter out = new StringWriter();
 			template.process(templateData, out);
-			logger.info(out.getBuffer().toString());
+			System.out.println(out.getBuffer().toString());
 			out.flush();
-			logger.info("===============================");
+			System.out.println("===============================");
 			
 			
 			// Write data to the file
@@ -83,39 +82,39 @@ public class Main {
 		}
 		
 		
-		logger.info("\n\n");
-		logger.info("==============Passing above xml to java binding==============");
-		logger.info(new String(messageIn));
-		logger.info("======================================\n");
+		System.out.println("\n\n");
+		System.out.println("==============Passing above xml to java binding==============");
+		System.out.println(new String(messageIn));
+		System.out.println("======================================\n");
 		
 		BookOrderInformation bookorderinformation = Main.runSmooks();
 		
-		logger.info("============Order Javabeans===========");
-		logger.info("ContextInformation  - SessionId: " + bookorderinformation.getContextInformation().getSessionId());
-		logger.info(" 		    - BookingMode: " + bookorderinformation.getContextInformation().getBookingMode());
-		logger.info("       		    - Country:    " + bookorderinformation.getContextInformation().getCountry());
-		logger.info("       		    - State:    " + bookorderinformation.getContextInformation().getState());
-		logger.info("       		    - City:  " + bookorderinformation.getContextInformation().getCity());	
-		logger.info("\n"); 
-		logger.info("BookOrderList:");
-		logger.info(" ");
+		System.out.println("============Order Javabeans===========");
+		System.out.println("ContextInformation  - SessionId: " + bookorderinformation.getContextInformation().getSessionId());
+		System.out.println(" 		    - BookingMode: " + bookorderinformation.getContextInformation().getBookingMode());
+		System.out.println("       		    - Country:    " + bookorderinformation.getContextInformation().getCountry());
+		System.out.println("       		    - State:    " + bookorderinformation.getContextInformation().getState());
+		System.out.println("       		    - City:  " + bookorderinformation.getContextInformation().getCity());	
+		System.out.println("\n"); 
+		System.out.println("BookOrderList:");
+		System.out.println(" ");
 		
   for (int i = 0; i < bookorderinformation.getBookOrderItems().size(); i++) {
 			Book book = bookorderinformation.getBookOrderItems().get(i);
 			book.setBookOrderId("A4RTPDF");
 			book.setDeliveryDate(LocalDate.of(2020, 05, 10));
 			book.setDispatchDate(LocalDate.of(2020, 05, 05));
-			logger.info("       (" + (i + 1) + ") BookOrderId:  " + book.getBookOrderId());
-			logger.info("       (" + (i + 1) + ") BookName:  " + book.getBookName());
-			logger.info("       (" + (i + 1) + ") BookPrice:  " + book.getBookPrice());
-			logger.info("       (" + (i + 1) + ") AuthorName:  " + book.getAuthorName());
-			logger.info("       (" + (i + 1) + ") PublisherName:  " + book.getPublisherName());
-			logger.info("       (" + (i + 1) + ") OrderBookingDate:  " + book.getOrderBookingDate());
-			logger.info("       (" + (i + 1) + ") DispatchDate:  " + book.getDispatchDate());
-			logger.info("       (" + (i + 1) + ") DeliveryDate:  " + book.getDeliveryDate());
+			System.out.println("       (" + (i + 1) + ") BookOrderId:  " + book.getBookOrderId());
+			System.out.println("       (" + (i + 1) + ") BookName:  " + book.getBookName());
+			System.out.println("       (" + (i + 1) + ") BookPrice:  " + book.getBookPrice());
+			System.out.println("       (" + (i + 1) + ") AuthorName:  " + book.getAuthorName());
+			System.out.println("       (" + (i + 1) + ") PublisherName:  " + book.getPublisherName());
+			System.out.println("       (" + (i + 1) + ") OrderBookingDate:  " + book.getOrderBookingDate());
+			System.out.println("       (" + (i + 1) + ") DispatchDate:  " + book.getDispatchDate());
+			System.out.println("       (" + (i + 1) + ") DeliveryDate:  " + book.getDeliveryDate());
 			
 			
-			logger.info("======================================");
+			System.out.println("======================================");
 			
 		}
 	}
